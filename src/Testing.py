@@ -1,7 +1,14 @@
+def method():
+    print("THIS IS A METHOD")
+
 
 myStr = "Hello World"
 
 print(myStr)
+
+num = 10.0
+num2 = 5
+print(abs(5) + pow(num2, num))
 
 # raw_input is for strings
 firstName = raw_input("Enter First Name: ")
