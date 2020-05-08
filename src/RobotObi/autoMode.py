@@ -1,19 +1,32 @@
-from gpiozero import Robot, DistanceSensor, DistanceSensorNoEcho, OutputDevice, InputDevice
+from gpiozero import Robot, DistanceSensor
 import time
 
-'''method1
-# Set-up
-ds = DistanceSensor(echo=18, trigger=16)
-
-# Get Constant Data Values
+robot = Robot(left=(17,18), right=(27,22))
+ds = DistanceSensor(echo=24, trigger=23)
 
 while True:
-        print('Distance: ' + ds.distance * 100)
-        time.sleep(1)
-'''
+    dist = ds.distance * 100
+    dist = round(dist, 3)
+    print(dist)
 
-trigger = OutputDevice(16)
-echo = InputDevice(18)
+    if dist > 10:
+        robot.forward(0.25)
+        time.sleep(0.5)
+    else:
+        robot.right()
+        time.sleep(0.5)
+
+        robot.forward(0.5)
+        time.sleep(0.5)
+
+        robot.right()
+        time.sleep(0.5)
+
+    time.sleep(0.1)
+
+''' longer version that shows what simpler stuff below is actually doing (or could be doing)
+trigger = OutputDevice(23)
+echo = InputDevice(24)
 
 pulse_start = 0
 pulse_end = 0
@@ -38,5 +51,6 @@ except DistanceSensorNoEcho:
     print('Nothing Found, Wait')
     time.sleep(1)
 except:
-    print('Wacky Shit Going Down')
+    print('Wacky Going Down')
     time.sleep(1)
+'''
